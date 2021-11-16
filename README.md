@@ -1,2 +1,1 @@
-# fun-projects
-on the grind
+messing up the best pratices are a best pratice, too.
