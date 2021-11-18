@@ -1,5 +1,1 @@
-kucing terbang di lanigt yang tinggi sekali
-hello
-hello
-hello
-hello
+try adding a task with ./todo.py -a [TASK]

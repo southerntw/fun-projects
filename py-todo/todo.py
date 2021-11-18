@@ -2,38 +2,49 @@
 import sys
 import argparse
 
-def readFile():
-  li = open('list.txt', 'a+')
+file_name = "list.txt"
+file = open(file_name, 'a+')
+
+def import_file():
+  with open(file_name) as f:
+    li = f.read().splitlines()
   return li
 
 def arguments():
-  # Help messages
+  # help messages
   msg = 'Simple and maybe useless to do list made from python'
-  add = 'Add to your to do list'
+  add = 'Add task to your to do list'
   
-  # Parser
+  # arguments parser
   parser = argparse.ArgumentParser(description = msg)
-  parser.add_argument('-a', '-add')
+  parser.add_argument('-a', '-add', dest='task', help=add)
   args = vars(parser.parse_args())
 
   return args
 
 def process(args):
-  li = readFile()
+  li = import_file()
 
-  add = args['a']
+  # initialize stuffs
+  add = args['task']
 
   # append the todo list
-  if args['a'] is not None:
+  if add:
     append(li, add)
 
 def append(li, add):
   try:
-    li.write(add + "\n")
+    file.write(add + "\n")
     print("Completed.")
   except:
    print("An error occured.")
 
+def printList(li):
+  for i in li:
+    print(i)
+
 if __name__ == "__main__":
   args = arguments()
+  li = import_file()
   process(args)
+  printList(li)
