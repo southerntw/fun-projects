@@ -1,28 +1,39 @@
 #!/usr/bin/env python
+import sys
+import argparse
 
-#def parseList():
-#  li.read()  
+def readFile():
+  li = open('list.txt', 'a+')
+  return li
 
-def appendList(li, index):
+def arguments():
+  # Help messages
+  msg = 'Simple and maybe useless to do list made from python'
+  add = 'Add to your to do list'
+  
+  # Parser
+  parser = argparse.ArgumentParser(description = msg)
+  parser.add_argument('-a', '-add')
+  args = vars(parser.parse_args())
+
+  return args
+
+def process(args):
+  li = readFile()
+
+  add = args['a']
+
+  # append the todo list
+  if args['a'] is not None:
+    append(li, add)
+
+def append(li, add):
   try:
-    for i in range(index, 0, -1):
-      li.seek(0)
-      data = li.read(100)
-      if len(data) > 0:
-        li.write("\n")
-      entry = str(input().strip())
-      li.write(entry)
+    li.write(add + "\n")
     print("Completed.")
   except:
-    print("An error occured.")
-
-def printList(list):
-  print()
-  print("Your to do list:")
-  for i in list:
-    print(i)
+   print("An error occured.")
 
 if __name__ == "__main__":
-  li = open('list.txt', 'a+')
-  index = int(input("Number of entries: ").strip())
-  appendList(li, index)
+  args = arguments()
+  process(args)
